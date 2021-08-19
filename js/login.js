@@ -3,4 +3,14 @@
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
 
+  let form = document.getElementById('myForm');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    // Obtener los datos para hacer un post
+
+    location.replace('./home.html');
+  })
+
 });

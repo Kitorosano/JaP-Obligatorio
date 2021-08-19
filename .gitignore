@@ -1,2 +1,13 @@
 # Ignora el PDF de la Letra del Obligatorio
 Letra.pdf
+
+# Ignora modelo entidad relacion (MER)
+MER.jpg
+
+# Ignora copias de archivos
+_*.js
+_*.html
+_*.css
+
+# Ignora carpeta auxiliar de fuentes
+fonts/
