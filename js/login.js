@@ -6,11 +6,15 @@ document.addEventListener("DOMContentLoaded", function(e){
   let form = document.getElementById('myForm');
 
   form.addEventListener('submit', function(e){
-    e.preventDefault();
+    e.preventDefault(); //Evita el redireccionamiento por default
 
-    // Obtener los datos para hacer un post
+    // Obtener los datos del input del nombre de usuario
+    let username = document.getElementById('username').value
 
-    location.replace('./home.html');
+    // Guardar ese dato en una variable de Local Storage
+    localStorage.setItem('username', username);
+  
+    location.replace('./home.html'); //Redireccione al home.html
   })
 
 });

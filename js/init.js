@@ -44,4 +44,22 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+  let usuario = localStorage.getItem('username'); //Obtengo la variable username del LocalStorage 
+ 
+  if(usuario){ //Si esa variable existe, entonces el usuario esta loggeado,
+    //Obtengo el elemento Nav, y le agrego los redireccionamientos a las otras paginas
+    document.getElementsByTagName('nav')[0]
+    .innerHTML += `
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2 d-none d-md-inline-block" href="home.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <a class="py-2 d-none d-md-inline-block" href="#">${usuario}</a>
+    </div>`; 
+  } else { //Sino, redireccionar al Login
+    location.replace('index.html')
+  }
+
 });
