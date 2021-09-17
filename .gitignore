@@ -10,4 +10,4 @@ _*.html
 _*.css
 
 # Ignora carpeta auxiliar de fuentes
-fonts/
+# fonts/
