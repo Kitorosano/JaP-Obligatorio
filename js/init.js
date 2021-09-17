@@ -50,16 +50,46 @@ document.addEventListener("DOMContentLoaded", function(e){
     //Obtengo el elemento Nav, y le agrego los redireccionamientos a las otras paginas
     document.getElementsByTagName('nav')[0]
     .innerHTML += `
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="home.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <a class="py-2 d-none d-md-inline-block" href="#">${usuario}</a>
-    </div>`; 
+    
+    `; 
   } else { //Sino, redireccionar al Login
     location.replace('index.html')
   }
 
+  document.getElementsByTagName('nav')[0]
+  .innerHTML = `
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="btn-group" id="btnUsuario">
+      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        ${localStorage.getItem('username') ? localStorage.getItem('username') : ''}
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="#" onclick="signOut();">Sign out</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarToggler"> 
+      <ul class="navbar-nav container justify-content-around text-center"> 
+        <li class="nav-item">
+          <a class="nav-link" href="home.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="categories.html">Categorías</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="products.html">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sell.html">Vender</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cart.html">Mi carrito</a>
+        </li>
+      </ul>
+    </div>`
 });

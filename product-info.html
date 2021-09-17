@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
-
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--FOR STAR RATING-->
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -16,15 +16,79 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark"></nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"></nav>
+  
+  <main class="container mt-5">
+    <h2 id="productName" class="text-center"></h2>
+    <p class="text-center">Categoria: 
+      <a id="productCategory" href="category-info.html"></a>
+    </p>
+    
+    <!-- ENCERRAR EN UNA CAJA CON BORDES -->
+    <hr>  
+    <div id="product-info" class="d-flex justify-content-center row">
+      <img id="productMainImage" class="col-md-7 img-fluid"  src="" alt="">
+      <div class="col-md-5"> 
+        <dl>
+          <dt>Descripción:</dt>
+          <dd>
+            <p id="productDescription"></p>
+          </dd>
+          
+          <div class="row justify-content-around">
+            <div class="text-center">
+              <dt>Precio:</dt>
+              <dd>
+                <p id="productPrice"></p>
+              </dd>
+            </div>
+            
+            <div class="text-center">
+              <dt>Stock:</dt>
+              <dd>
+                <p id="productSoldCount"></p>
+              </dd>
+            </div>
+          </div>
+          <br>
+          <div class="row text-center text-lg-left pt-2" id="productRelatedImages"></div>
+        </dl>
+      </div>
     </div>
-  </div>
+    <hr>
+    
+    <div id="comment-section" class="d-flex justify-content-center row ">
+      <div class="flex-column align-items-center col-md-8 panel ">
+        <form id="input-comment" class="d-flex flex-column mt-3">
+          <div class="row justify-content-between mx-2">
+            <h5>Nuevo Comentario</h5>
+            <small class="align-self-center" id="show-comments-count"></small>
+          </div>
+          <div class="form-group mt-2 mb-0">
+            <textarea class="form-control" id="message" placeholder="Agrega un comentario" style="resize: none;"></textarea>
+
+            <div class="d-flex align-items-center pt-3 px-1 justify-content-end">
+              <ul class="rating">
+                <i class="rating-item fas fa-star" data-rate="1"></i>
+                <i class="rating-item fas fa-star" data-rate="2"></i>
+                <i class="rating-item fas fa-star" data-rate="3"></i>
+                <i class="rating-item fas fa-star" data-rate="4"></i>
+                <i class="rating-item fas fa-star" data-rate="5"></i>
+              </ul>
+              <button type="button" class="btn btn-primary pull-right ml-3" onclick="enviarComentario()">Enviar</button>
+            </div>
+          </div>
+        </form>
+        <hr>   
+        
+        <div id="show-comments"></div>
+      </div>
+      
+      <div id="related-products" class="col-md-4"></div>
+    </div>
+    
+  </main>
+  
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">
@@ -46,6 +110,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
+  <script src="js/comments.js"></script>
 </body>
 
 </html>

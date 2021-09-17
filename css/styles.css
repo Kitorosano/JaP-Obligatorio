@@ -139,3 +139,90 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+@media (min-width: 768px) { /*MEDIA QUERY PARA EL BOTON DE USUARIO  */
+  #btnUsuario {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+
+    -ms-flex-order: 1;
+    order: 1;
+  }
+  #navbarToggler {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+
+    max-width: 100%;
+  }
+}
+/* 
+.carousel .carousel-item {
+  height: 300px;
+}
+
+.carousel-item img {
+    position: absolute;
+    object-fit:cover;
+    top: 0;
+    left: 0;
+    min-height: 500px;
+}
+@media(max-width:768px){
+  .carousel .carousel-inner{
+    height:auto
+   }
+} */
+
+#comment-date {
+  font-size: 13px
+}
+
+#comment-text {
+  font-size: 14px
+}
+
+#comment-name {
+  color: #323232
+}
+
+.panel {
+  background-color: whitesmoke;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.075);
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 15px;
+}
+
+.rating {
+  display: flex;
+  padding: 0;
+  margin: 0; 
+}
+
+.rating-item {
+  font-size: 1.2em;
+}
+
+.rating-item { 
+  color: #212529;
+}
+.rating-item.active {
+  color: orange;
+}
+
+.rating:hover .rating-item::before { /*CUANDO DETECTE UN HOVER MARCAR LAS ESTRELLAS*/ 
+  color: orange;
+}
+.rating-item:hover ~ .rating-item::before { /*HASTA QUE DEJE DE HACER HOVER VACIAS A LAS DEMAS*/
+  color: #212529;
+}

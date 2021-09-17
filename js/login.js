@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     // Guardar ese dato en una variable de Local Storage
     localStorage.setItem('username', username);
-  
     location.replace('./home.html'); //Redireccione al home.html
   })
 

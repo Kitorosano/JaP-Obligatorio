@@ -14,7 +14,7 @@
 	<link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-	<nav class="site-header sticky-top py-1 bg-dark"></nav>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"></nav>
 	<main role="main" class="pb-5">
 		<div class="text-center p-4">
 			<h2>Productos</h2>
@@ -37,7 +37,12 @@
 				</div>
 			</div>
 			<div class="row justify-content-end">
-				<div class="col-md-6"></div>
+				<div class="col-md-6 col-sm-12 mb-1 container">
+          <div class="input-group flex-nowrap">
+            <input id="txtBuscar" type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" style="border: none; outline: none; border-bottom: 2px solid whitesmoke;">
+            <button id="btnBuscar" class="btn ml-1" type="button" ><i class="fas fa-search mr-1"></i></button>
+          </div>
+        </div>
 					<div class="col-md-6 col-sm-12 mb-1 container">
 						<div class="row container p-0 m-0">
 							<div class="col">
