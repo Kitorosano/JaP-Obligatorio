@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 });
 
-// function onSignIn(googleUser) {
-//   var profile = googleUser.getBasicProfile();
-//   localStorage.setItem('username',profile.getName());  
-//   location.replace('./home.html'); //Redireccione al home.html
-// }
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  // localStorage.setItem('username',profile.getName());  
+  location.replace('./home.html'); //Redireccione al home.html
+}

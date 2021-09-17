@@ -345,27 +345,20 @@ iframe {
 
 .login100-form-btn {
   font-family: Raleway-Bold;
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
   line-height: 1.2;
 
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0 20px;
-  min-width: 150px;
-  height: 55px;
+  min-width: 130px;
+  height: 45px;
   background-color: #333333;
   border-radius: 27px;
 
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
+  -webkit-transition: all 0.15s;
+  -o-transition: all 0.15s;
+  -moz-transition: all 0.15s;
+  transition: all 0.15s;
 }
 
 .login100-form-btn:hover {

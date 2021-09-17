@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         ${localStorage.getItem('username') ? localStorage.getItem('username') : ''}
       </button>
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="#" onclick="signOut();">Sign out</a>
+        <a class="dropdown-item" href="#" onclick="signOut()">Sign out</a>
         <a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Separated link</a>
@@ -94,9 +94,9 @@ document.addEventListener("DOMContentLoaded", function(e){
     </div>`
 });
 
-// function signOut() {
-//   var auth2 = gapi.auth2.getAuthInstance();
-//   auth2.signOut().then(function () {
-//     console.log('User signed out.');
-//   });
-// }
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    localStorage.removeItem('username');
+  });
+}
