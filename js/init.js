@@ -45,16 +45,8 @@ var getJSONData = function(url){
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
   let usuario = localStorage.getItem('username'); //Obtengo la variable username del LocalStorage 
- 
-  if(usuario){ //Si esa variable existe, entonces el usuario esta loggeado,
-    //Obtengo el elemento Nav, y le agrego los redireccionamientos a las otras paginas
-    document.getElementsByTagName('nav')[0]
-    .innerHTML += `
-    
-    `; 
-  } else { //Sino, redireccionar al Login
-    location.replace('index.html')
-  }
+
+  if(!usuario) return signOut();
 
   document.getElementsByTagName('nav')[0]
   .innerHTML = `
@@ -64,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     <div class="btn-group" id="btnUsuario">
       <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        ${localStorage.getItem('username') ? localStorage.getItem('username') : ''}
+        ${usuario ? usuario : ''}
       </button>
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="#" onclick="signOut()">Sign out</a>
