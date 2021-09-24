@@ -7,16 +7,16 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/pro
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 
-var showSpinner = function(){
+let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
 
-var hideSpinner = function(){
+let hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
-var getJSONData = function(url){
-    var result = {};
+let getJSONData = function(url){
+    let result = {};
     showSpinner();
     return fetch(url)
     .then(response => {
@@ -40,21 +40,37 @@ var getJSONData = function(url){
     });
 }
 
+let auth2;
+function init() {
+  gapi.load('auth2', function() {
+    /* Ready. Make a call to gapi.auth2.init */
+    auth2 = gapi.auth2.init({
+      // client_id: '422867937562-5jfb3j6c6uqpnm5bpvhefvqj6dd347di.apps.googleusercontent.com'
+      client_id: '422867937562-nj74vki2lis9eavkkgadbelm8uus6ndg.apps.googleusercontent.com'
+    });
+  });
+}
+
+function signOut() {
+  if(auth2){
+    auth2.signOut().then(function () {
+      localStorage.removeItem('username');
+    });
+  } else 
+    localStorage.removeItem('username');
+
+  location.replace('./index.html'); //Redireccione al home.html
+}
+
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-  let usuario = localStorage.getItem('username'); //Obtengo la variable username del LocalStorage 
- 
-  if(usuario){ //Si esa variable existe, entonces el usuario esta loggeado,
-    //Obtengo el elemento Nav, y le agrego los redireccionamientos a las otras paginas
-    document.getElementsByTagName('nav')[0]
-    .innerHTML += `
-    
-    `; 
-  } else { //Sino, redireccionar al Login
-    location.replace('index.html')
-  }
+  
+  let usuario = localStorage.getItem('username');
+
+  if(!usuario) return signOut();
 
   document.getElementsByTagName('nav')[0]
   .innerHTML = `
@@ -64,10 +80,10 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     <div class="btn-group" id="btnUsuario">
       <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        ${localStorage.getItem('username') ? localStorage.getItem('username') : ''}
+        ${usuario ? usuario.replace(',', ' ') : ''}
       </button>
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="#" onclick="signOut();">Sign out</a>
+        <a class="dropdown-item" href="#" onclick="signOut()">Sign out</a>
         <a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Separated link</a>
@@ -93,3 +109,4 @@ document.addEventListener("DOMContentLoaded", function(e){
       </ul>
     </div>`
 });
+
