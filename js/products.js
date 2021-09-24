@@ -1,10 +1,11 @@
 const ORDER_ASC_BY_PRICE = "Price+";
 const ORDER_DESC_BY_PRICE = "Price-";
 const ORDER_BY_RELEVANCY = "Relevancy";
-var currentProductsArray = [];
-var currentSortCriteria = undefined;
-var minPrice = undefined;
-var maxPrice = undefined;
+let currentProductsArray = [];
+let currentSortCriteria = undefined;
+let minPrice = undefined;
+let maxPrice = undefined;
+let filterText = '';
 
 function sortProducts(criteria, array){
   let result = [];
@@ -40,9 +41,10 @@ function showProductsList(){
 
   for(product of currentProductsArray){ //Para cada producto de mi array de productos actuales
     const {cost, imgSrc, description, soldCount, name, currency} = product; // Desestructuracion de objeto,(para acceder mas facilmente a las propiedades del producto)
-      
+    
     if (((minPrice == undefined) || (minPrice != undefined && parseInt(cost) >= minPrice)) && //Voy a mostrar el producto siempre y cuando:
-        ((maxPrice == undefined) || (maxPrice != undefined && parseInt(cost) <= maxPrice))){  //No haya un filtro puesto, o si el producto esta dentro de los rangos establecidos
+        ((maxPrice == undefined) || (maxPrice != undefined && parseInt(cost) <= maxPrice)) &&
+        ((name.toUpperCase().indexOf(filterText) > -1) || (description.toUpperCase().indexOf(filterText) > -1))){  //No haya un filtro puesto, o si el producto esta dentro de los rangos establecidos
 
         htmlContentToAppend += `
         <a href="product-info.html" class="list-group-item list-group-item-action">
@@ -114,7 +116,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
     showProductsList();
   });
 
-
+  let msg = document.getElementById('txtBuscar');
+  msg.addEventListener("keyup", (event) => {
+    filterText = msg.value.trim().toUpperCase();
+    showProductsList()
+  });
 
   document.getElementById("rangeFilterPrice").addEventListener("click", () => {
     //Obtengo el mínimo y máximo de los intervalos para filtrar por precio
