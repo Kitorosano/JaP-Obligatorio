@@ -45,8 +45,8 @@ function init() {
   gapi.load('auth2', function() {
     /* Ready. Make a call to gapi.auth2.init */
     auth2 = gapi.auth2.init({
-      // client_id: '422867937562-nj74vki2lis9eavkkgadbelm8uus6ndg.apps.googleusercontent.com'
-      client_id: '422867937562-5jfb3j6c6uqpnm5bpvhefvqj6dd347di.apps.googleusercontent.com' // LOCALHOST
+      client_id: '422867937562-nj74vki2lis9eavkkgadbelm8uus6ndg.apps.googleusercontent.com'
+      // client_id: '422867937562-5jfb3j6c6uqpnm5bpvhefvqj6dd347di.apps.googleusercontent.com' // LOCALHOST
     });
   });
 }
