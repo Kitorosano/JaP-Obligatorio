@@ -28,32 +28,49 @@
     
     <!-- ENCERRAR EN UNA CAJA CON BORDES -->
     <hr>  
-    <div id="product-info" class="d-flex justify-content-center row">
-      <img id="productMainImage" class="col-md-7 img-fluid"  src="" alt="">
+    <div id="product-info" class="d-flex justify-content-center row">      
+      <!-- CARROUSEL -->
+      <div class="product-image col-md-7">
+        <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+          <ol id="productRelatedImages" class="carousel-indicators"></ol>
+          <div id="productImages" class="carousel-inner"></div>
+          <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <!--  -->
       <div class="col-md-5"> 
         <dl>
-          <dt>Descripción:</dt>
+          <dt class="productInfo__titles">Descripción:</dt>
           <dd>
             <p id="productDescription"></p>
           </dd>
-          
           <div class="row justify-content-around">
             <div class="text-center">
-              <dt>Precio:</dt>
+              <dt class="productInfo__titles">Precio:</dt>
               <dd>
                 <p id="productPrice"></p>
               </dd>
             </div>
             
             <div class="text-center">
-              <dt>Stock:</dt>
+              <dt class="productInfo__titles">Vendidos:</dt>
               <dd>
                 <p id="productSoldCount"></p>
               </dd>
             </div>
           </div>
-          <br>
-          <div class="row text-center text-lg-left pt-2" id="productRelatedImages"></div>
+
+          <!-- <dt class="productInfo__titles">Productos Relacionados:</dt>
+          <dd>
+            <p id="relatedProducts"></p>
+          </dd> -->
         </dl>
       </div>
     </div>

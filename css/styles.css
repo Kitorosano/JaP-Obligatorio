@@ -226,3 +226,9 @@ a.custom-card:hover {
 .rating-item:hover ~ .rating-item::before { /*HASTA QUE DEJE DE HACER HOVER VACIAS A LAS DEMAS*/
   color: #212529;
 }
+
+.productInfo__titles {
+  font-size: 18px;
+  font-variant: small-caps;
+  border-bottom: 1px solid whitesmoke;
+}
