@@ -45,38 +45,39 @@
         </div>
       </div>
       <!--  -->
-      <div class="col-md-5"> 
+      <div class="col-md-5"><br> 
         <dl>
           <dt class="productInfo__titles">Descripción:</dt>
           <dd>
             <p id="productDescription"></p>
           </dd>
+          <br>
+          <br>
           <div class="row justify-content-around">
             <div class="text-center">
               <dt class="productInfo__titles">Precio:</dt>
               <dd>
-                <p id="productPrice"></p>
+                <p id="productPrice" class="flex justify-content-center">
+                  <span class="flex align-self-center"><i class="fas fa-tag"></i></span>
+                </p>
               </dd>
             </div>
             
             <div class="text-center">
               <dt class="productInfo__titles">Vendidos:</dt>
               <dd>
-                <p id="productSoldCount"></p>
+                <p id="productSoldCount" class="flex justify-content-center">
+                  <span class="flex align-self-center"><i class="fas fa-box-open"></i></span>
+                </p>
               </dd>
             </div>
           </div>
-
-          <!-- <dt class="productInfo__titles">Productos Relacionados:</dt>
-          <dd>
-            <p id="relatedProducts"></p>
-          </dd> -->
         </dl>
       </div>
     </div>
     <hr>
     
-    <div id="comment-section" class="d-flex justify-content-center row ">
+    <div i  d="comment-section" class="d-flex justify-content-around row ">
       <div class="flex-column align-items-center col-md-8 panel ">
         <form id="input-comment" class="d-flex flex-column mt-3">
           <div class="row justify-content-between mx-2">
@@ -103,9 +104,14 @@
         <div id="show-comments"></div>
       </div>
       
-      <div id="related-products" class="col-md-4"></div>
+      <div class="col-md-3">
+        <br>
+        <dt class="productInfo__titles">Productos Relacionados:</dt>
+        <br>
+        <div id="relatedProducts"></div>
+      </div>
+        
     </div>
-    
   </main>
   
   <footer class="text-muted">

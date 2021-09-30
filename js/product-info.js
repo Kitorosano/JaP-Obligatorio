@@ -1,4 +1,5 @@
-let currentProduct = {};
+let currentProduct = null;
+let allProducts = null;
 
 function showProductImages(array) {
   let appendProductImage = "";
@@ -24,33 +25,61 @@ function showProductImages(array) {
   imagesDivs.innerHTML = appendProductImage;
 }
 
-function showProduct() {
+function showRelatedProduct(){  
+  let htmlContentToAppend = "";
+
+  for(let i of currentProduct.relatedProducts){ //Para cada producto de mi array de productos actuales
+    let related = allProducts[i];
+    
+    htmlContentToAppend+=`
+    <a href="product-info.html" style="text-decoration: none; color: black">
+      <img src="./${related.imgSrc}" alt="${related.description}" class="img-thumbnail">
+      <div class="m-2">
+        <b class="mb-0">${related.name} </b><small class="text-muted"> (${currentProduct.category})</small>
+        <p class="mb-0 text-muted" style="font-weight: 500">$${related.cost} ${related.currency}</p>
+      </div><hr>
+    </a>
+    `;
+  }
+  document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
+}
+
+
+function showProductInfo() {
+  if(!currentProduct) return;
+
 	let productNameHTML = document.getElementById('productName');
 	let productDescriptionHTML = document.getElementById('productDescription');
 	let productSoldCountHTML = document.getElementById('productSoldCount');
 	let productCriteriaHTML = document.getElementById('productCategory');
 	let productPriceHTML = document.getElementById('productPrice');
-	// let productsRelatedHTML = document.getElementById("relatedProducts");
 
 	productNameHTML.innerHTML = currentProduct.name;
 	productDescriptionHTML.innerHTML = currentProduct.description;
-	productSoldCountHTML.innerHTML = currentProduct.soldCount;
-	productPriceHTML.innerHTML = `$${currentProduct.cost} ${currentProduct.currency}`;
+	productSoldCountHTML.innerHTML += currentProduct.soldCount;
+	productPriceHTML.innerHTML += `$${currentProduct.cost} ${currentProduct.currency}`;
 	productCriteriaHTML.innerHTML = currentProduct.category;
-	// productsRelatedHTML.innerHTML = currentProduct.relatedProducts;
 
-	//Muestro las imagenes en forma de galería
-	showProductImages(currentProduct.images);
+	showProductImages(currentProduct.images);//Muestro las imagenes en forma de galería
+  showRelatedProduct();
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener('DOMContentLoaded', function (e) {
-	getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
-		if (resultObj.status === 'ok') {
-			currentProduct = resultObj.data;
-			showProduct();
+  
+  getJSONData(PRODUCTS_URL).then(function (resultArr){
+    if(resultArr.status === 'ok'){
+      allProducts = resultArr.data;
+
+      getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
+        if (resultObj.status === 'ok') {
+          currentProduct = resultObj.data;
+
+          showProductInfo();
+        }
+      })
 		}
 	});
 });

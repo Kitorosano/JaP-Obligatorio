@@ -45,8 +45,8 @@ function init() {
   gapi.load('auth2', function() {
     /* Ready. Make a call to gapi.auth2.init */
     auth2 = gapi.auth2.init({
-      client_id: '422867937562-nj74vki2lis9eavkkgadbelm8uus6ndg.apps.googleusercontent.com'
-      // client_id: '422867937562-5jfb3j6c6uqpnm5bpvhefvqj6dd347di.apps.googleusercontent.com' // LOCALHOST
+      // client_id: '422867937562-nj74vki2lis9eavkkgadbelm8uus6ndg.apps.googleusercontent.com'
+      client_id: '422867937562-5jfb3j6c6uqpnm5bpvhefvqj6dd347di.apps.googleusercontent.com' // LOCALHOST
     });
   });
 }
@@ -83,10 +83,10 @@ document.addEventListener("DOMContentLoaded", function(e){
         ${usuario ? usuario.replace(',', ' ') : ''}
       </button>
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="#" onclick="signOut()">Sign out</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
+        <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
+        <a class="dropdown-item" href="#" onclick="signOut()">Cerrar Sesion</a>
       </div>
     </div>
     <div class="collapse navbar-collapse" id="navbarToggler"> 
@@ -102,9 +102,6 @@ document.addEventListener("DOMContentLoaded", function(e){
         </li>
         <li class="nav-item">
           <a class="nav-link" href="sell.html">Vender</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="cart.html">Mi carrito</a>
         </li>
       </ul>
     </div>`

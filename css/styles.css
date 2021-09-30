@@ -209,12 +209,10 @@ a.custom-card:hover {
   margin: 0; 
 }
 
-.rating-item {
-  font-size: 1.2em;
-}
-
 .rating-item { 
+  font-size: 1.2em;
   color: #212529;
+  cursor: pointer;
 }
 .rating-item.active {
   color: orange;
