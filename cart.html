@@ -1,110 +1,73 @@
 <!DOCTYPE html>
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"
-		/>
-		<meta name="description" content="" />
-		<title>eMercado - Todo lo que busques está aquí</title>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-		<link
-			href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-			rel="stylesheet"
-		/>
-		<meta
-			name="google-signin-client_id"
-			content="422867937562-nj74vki2lis9eavkkgadbelm8uus6ndg.apps.googleusercontent.com"
-		/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>eMercado - Todo lo que busques está aquí</title>
 
-		<style>
-			.bd-placeholder-img {
-				font-size: 1.125rem;
-				text-anchor: middle;
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
-			}
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <meta name="google-signin-client_id" content="422867937562-nj74vki2lis9eavkkgadbelm8uus6ndg.apps.googleusercontent.com">
 
-			@media (min-width: 768px) {
-				.bd-placeholder-img-lg {
-					font-size: 3.5rem;
-				}
-			}
-		</style>
-		<link href="css/bootstrap.min.css" rel="stylesheet" />
-		<link href="css/styles.css" rel="stylesheet" />
-		<link href="css/dropzone.css" rel="stylesheet" />
-		<link href="css/carrito.css" rel="stylesheet" />
-	</head>
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
 
-	<body>
-		<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"></nav>
-		<main class="container p-5">
-			<div class="contenedor-carrito">
-				<div class="Cart-Container">
-					<div class="Cart-Header">
-						<h3 class="Cart-Header__Heading">Carrito de compras</h3>
-						<h5 class="Cart-Header__Action" onclick="borrarCarrito()">Borrar todo</h5>
-					</div>
-					<div id="listaCarrito">
-						<!-- PRODUCTOS DEL CARRITO -->
-					</div>
-					<hr style="width: 66%; float: right; margin-right: 5%" />
-					<div class="checkout text-right">
-						<div class="checkout__total">
-							<div class="text-left">
-								<div class="checkout__Subtotal">Total</div>
-								<div class="checkout__items" id="cantidadTotal"></div>
-							</div>
-							<div class="checkout__total-amount" id="precioTotal">
-                
-              </div>
-						</div>
-            <div class="checkout__currency btn-group btn-group-toggle" id="currencyToggle" data-toggle="buttons">
-              <label class="btn btn-outline-dark " id="toggleUSD">
-                <input type="radio" name="currency" autocomplete="off" >USD
-              </label>
-              <label class="btn btn-outline-dark active" id="toggleUYU">
-                <input type="radio" name="currency" autocomplete="off" checked >UYU
-              </label>
-            </div>
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/dropzone.css" rel="stylesheet">
+</head>
 
-						<button class="checkout__button">Comprar</button>
-					</div>
-				</div>
-			</div>
-		</main>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"></nav>
+  <div class="container p-5">
+    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
+      <h4 class="alert-heading">¡A trabajar! :)</h4>
+      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
+      <hr>
+      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    </div>
+  </div>
 
-		<footer class="text-muted">
-			<div class="container">
-				<p class="float-right">
-					<a href="#">Volver arriba</a>
-				</p>
-				<p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-				<p>
-					Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
-					letra del obligatorio.
-				</p>
-			</div>
-		</footer>
+  
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
 
-		<div id="spinner-wrapper">
-			<div class="lds-ring">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
-		</div>
-		<script src="js/jquery-3.4.1.min.js"></script>
-		<script src="js/bootstrap.bundle.min.js"></script>
-		<script src="js/dropzone.js"></script>
-		<script src="js/init.js"></script>
-		<script src="js/cart.js"></script>
-	</body>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/dropzone.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
 </html>
