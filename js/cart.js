@@ -30,20 +30,6 @@ function calcularTotal() {
   toggleCurrency();
 }
 
-/**MI CANTIDAD NO ES UN INPUT, POR ENDE NECESITO FUNCIONES PARA INCREMENTAR O DECREMENTAR ESE VALOR */
-function incrementarCantidad(i) {
-	let cantidad = parseFloat(document.getElementById(`count${i}`).innerText);
-	document.getElementById(`count${i}`).innerText = cantidad + 1;
-	calcularSubtotal(i);
-}
-function decrementarCantidad(i) {
-	let cantidad = parseFloat(document.getElementById(`count${i}`).innerText);
-	if (cantidad > 1)
-		document.getElementById(`count${i}`).innerText = cantidad - 1;
-	calcularSubtotal(i);
-}
-/** */
-
 function calcularSubtotal(i) {
 	elt = document.getElementById(`count${i}`);
 	let precio = parseFloat(elt.dataset.unitCost);
@@ -51,13 +37,15 @@ function calcularSubtotal(i) {
 
 	let total = precio * cantidad;
 
-	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2).replace(/\./g, ',');;
+	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2).replace(/\./g, ',');
+  productosCarrito[i].count = cantidad; //GUARDO LA CANTIDAD EN MI ARRAY DE CARRITO, PARA QUE CUANDO BORRE UN ELEMENTO Y VUELVA A MOSTRAR, CONSERVE LA CANTIDAD
 	calcularTotal();
 }
 
 function mostrarInfoProducto() {
+  if(!productosCarrito.length) return carritoVacio();
+  
 	htmlTexto = '';
-
 	for (let i = 0; i < productosCarrito.length; i++) {
 		const producto = productosCarrito[i];
 
@@ -104,6 +92,17 @@ function borrarCarrito() {
 	mostrarInfoProducto();
 }
 
+
+function carritoVacio(){
+	document.getElementById('contenedor-carrito').innerHTML = `
+    <div class="container">
+      <h1>Carrito Vacio</h1>
+      <button class="btn btn-secondary mt-2" onclick="location.href='./products.html'">Volver a productos</button>
+    </div> 
+  `;
+}
+
+
 document.addEventListener('DOMContentLoaded', function (e) {
 	getJSONData(CART_INFO_URL_DESAFIANTE).then(function (resultObj) {
 		if (resultObj.status === 'ok') {
@@ -120,3 +119,5 @@ document.addEventListener('DOMContentLoaded', function (e) {
     })
   };
 });
+
+
