@@ -12,9 +12,9 @@ function toggleCurrency() {
 	let divTotal = document.getElementById('precioTotal');
   
   if (currency == 'USD') {
-    divTotal.innerHTML = `$${(totalCarrito / 40).toFixed(2)}`.replace(/\./g, ',');
+    divTotal.innerHTML = `$${(totalCarrito / 40).toFixed(2).replace(/\./g, ',')}`
 	} else if(currency == 'UYU') {
-    divTotal.innerHTML = `$${(totalCarrito).toFixed(2)}`.replace(/\./g, ',');
+    divTotal.innerHTML = `$${(totalCarrito).toFixed(2).replace(/\./g, ',')}`
 	}
 }
 
@@ -23,7 +23,7 @@ function calcularTotal() {
   totalCarrito = 0;
   let subtotalesCarrito = document.getElementsByClassName('subtotal');
 	for (let i = 0; i < subtotalesCarrito.length; i++) {
-    let index = subtotalesCarrito[i].id.replace('subtotal','')
+    let index = subtotalesCarrito[i].id.replace('subtotal','');
 		let subtotalProducto = parseFloat(document.getElementById(`subtotal${index}`).innerHTML);
 		if (productosCarrito[index].currency == 'USD') subtotalProducto *= 40;
 		totalCarrito += subtotalProducto;
@@ -54,13 +54,15 @@ function calcularSubtotal(i) {
 
 	let total = precio * cantidad;
 
-	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2);
+	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2).replace(/\./g, ',');
+  productosCarrito[i].count = cantidad; //GUARDO LA CANTIDAD EN MI ARRAY DE CARRITO, PARA QUE CUANDO BORRE UN ELEMENTO Y VUELVA A MOSTRAR, CONSEVE LA CANTIDAD
 	calcularTotal();
 }
 
 function mostrarInfoProducto() {
-	htmlTexto = '';
+  if(!productosCarrito.length) return carritoVacio();
 
+	htmlTexto = '';
 	for (let i = 0; i < productosCarrito.length; i++) {
 		const producto = productosCarrito[i];
 
@@ -107,6 +109,15 @@ function borrarCarrito() {
 	mostrarInfoProducto();
 }
 
+function carritoVacio(){
+  document.getElementById('contenedor-carrito').innerHTML = `
+    <div class="container">
+      <h1>Carrito Vacio</h1>
+      <button class="btn btn-secondary mt-2" onclick="location.href='./products.html'">Volver a productos</button> 
+    </div>
+  `;
+}
+
 document.addEventListener('DOMContentLoaded', function (e) {
 	getJSONData(CART_INFO_URL_DESAFIANTE).then(function (resultObj) {
 		if (resultObj.status === 'ok') {
@@ -124,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
   /**RADIO DE CURRENCY */
   for(radio of document.getElementsByClassName('radio_currency')){
     radio.addEventListener('click', function(e){
-      currency = e.target.dataset.value
+      currency = e.target.dataset.value;
       toggleCurrency();
     })
   }
