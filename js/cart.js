@@ -72,24 +72,20 @@ function mostrarInfoProducto() {
 		const producto = productosCarrito[i];
 
 		htmlTexto += `
-    <div class="Cart_Items">
-      <div class="Cart_Items__image-box col-3">
+    <div class="Cart_Items row justify-content-between align-items-center">
+      <div class="Cart_Items__image-box col-12 col-sm-6 col-lg-3">
         <img src="${producto.src}" class="text-center" style="height: 120px;" />
       </div>
-      <div class="Cart_Items__about col-4">
+      <div class="Cart_Items__about col-12 col-sm-6 col-lg-4">
         <h1 class="Cart_Items__title">${producto.name}</h1>
-        <h3 class="Cart_Items__subtitle">${producto.currency}$${
-			producto.unitCost
-		}</h3>
+        <h3 class="Cart_Items__subtitle">${producto.currency}$${ producto.unitCost }</h3>
       </div>
-      <div class="Cart_Items__counter col-2">
+      <div class="Cart_Items__counter col-6 offset-md-1 col-md-4 offset-lg-0 col-lg-2 ">
         <div class="Cart_Items__btnCount" onclick="countUp(${i})">+</div>
-        <div class="Cart_Items__count" data-unit-cost="${producto.unitCost}" id="count${i}" onchange="calcularSubtotal(${i})">${
-			producto.count
-		}</div>
+        <div class="Cart_Items__count" data-unit-cost="${producto.unitCost}" id="count${i}" onchange="calcularSubtotal(${i})">${ producto.count }</div>
         <div class="Cart_Items__btnCount" onclick="countDown(${i})">-</div>
       </div>
-      <div class="Cart_Items__prices col-3 text-right">
+      <div class="Cart_Items__prices col-6 col-md-3 col-lg-3 text-right">
         <div class="Cart_Items__amount row justify-content-end mr-1">
           ${producto.currency}$
           <div data-index="${i}" class="subtotal" id="subtotal${i}">${(producto.unitCost * producto.count).toFixed(2)}</div>

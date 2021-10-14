@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     </button>
 
     <div class="btn-group" id="btnUsuario">
-      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         ${usuario ? usuario.replace(',', ' ') : ''}
       </button>
       <div class="dropdown-menu dropdown-menu-right">
