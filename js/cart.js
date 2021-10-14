@@ -12,7 +12,7 @@ function toggleCurrency() {
   if (currency == 'USD') {
 		divTotal.innerHTML = `$${(totalCarrito / 40).toFixed(2).replace(/\./g, ',')}`;
 	} else if(currency == 'UYU') {
-		divTotal.innerHTML = `$${(totalCarrito * 40).toFixed(2).replace(/\./g, ',')}`;
+		divTotal.innerHTML = `$${(totalCarrito).toFixed(2).replace(/\./g, ',')}`;
 	}
 }
 
