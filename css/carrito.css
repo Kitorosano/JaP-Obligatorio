@@ -12,6 +12,7 @@
 }
 
 .Cart-Header {
+	font-size: 26px;
 	margin: auto;
 	height: 15%;
 	display: flex;
@@ -19,12 +20,11 @@
 	align-items: center;
 }
 .Cart-Header__Heading {
-	font-size: 20px;
 	font-weight: 700;
 	color: #2f3841;
 }
 .Cart-Header__Action {
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 600;
 	color: #e44c4c;
 	cursor: pointer;
