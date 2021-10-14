@@ -1,48 +1,48 @@
 let productosCarrito;
 let currency = 'UYU';
-let toggleChange = false;
+let totalCarrito = 0;
 
 /**TODO
  * CAMBIAR EL PASAR INDICES, POR USAR UN DATASET CON EL INDICE
  */
 
-function toggleCurrency(curr) {
-	let total = document.getElementById('precioTotal');
-  if(!toggleChange) return;
+function toggleCurrency() {
+	let divTotal = document.getElementById('precioTotal');
   
-  if (curr == 'USD') {
-		total.innerHTML = `$${(parseFloat(total.innerHTML.slice(1)) / 40).toFixed(2)}`
-	} else {
-		total.innerHTML = `$${(parseFloat(total.innerHTML.slice(1)) * 40).toFixed(2)}`
+  if (currency == 'USD') {
+		divTotal.innerHTML = `$${(totalCarrito / 40).toFixed(2).replace(/\./g, ',')}`;
+	} else if(currency == 'UYU') {
+		divTotal.innerHTML = `$${(totalCarrito * 40).toFixed(2).replace(/\./g, ',')}`;
 	}
 }
 
 function calcularTotal() {
-	// CALCULAR Y MOSTRAR EL TOTAL
-	let sumaTotal = 0;
+	// CALCULAR EL TOTAL EN BASE A LOS SUBTOTALES DE LOS PRODUCTOS
+	totalCarrito = 0;
   let subtotalesCarrito = document.getElementsByClassName('subtotal');
 	for (let i = 0; i < subtotalesCarrito.length; i++) {
-    let index = subtotalesCarrito[i].dataset.index;
-    console.log(index)
-		let toSum = parseFloat(document.getElementById(`subtotal${index}`).innerHTML);
-		if (productosCarrito[index].currency == 'USD') toSum *= 40;
-		sumaTotal += toSum;
+    let index = subtotalesCarrito[i].id.replace('subtotal','');
+		let subtotalProducto = parseFloat(document.getElementById(`subtotal${index}`).innerHTML);
+		if (productosCarrito[index].currency == 'USD') subtotalProducto *= 40;
+		totalCarrito += subtotalProducto;
 	}
-  if(currency == 'USD') sumaTotal/=40;
-	document.getElementById('precioTotal').innerHTML = `$${sumaTotal.toFixed(2)}`.replace(/\./g, ',');
+  // MOSTRAR EL TOTAL DEPENDIENDO DE LA CURRENCY ELEGIDA
+  toggleCurrency();
 }
 
-function countUp(i) {
+/**MI CANTIDAD NO ES UN INPUT, POR ENDE NECESITO FUNCIONES PARA INCREMENTAR O DECREMENTAR ESE VALOR */
+function incrementarCantidad(i) {
 	let cantidad = parseFloat(document.getElementById(`count${i}`).innerText);
 	document.getElementById(`count${i}`).innerText = cantidad + 1;
 	calcularSubtotal(i);
 }
-function countDown(i) {
+function decrementarCantidad(i) {
 	let cantidad = parseFloat(document.getElementById(`count${i}`).innerText);
 	if (cantidad > 1)
 		document.getElementById(`count${i}`).innerText = cantidad - 1;
 	calcularSubtotal(i);
 }
+/** */
 
 function calcularSubtotal(i) {
 	elt = document.getElementById(`count${i}`);
@@ -51,18 +51,8 @@ function calcularSubtotal(i) {
 
 	let total = precio * cantidad;
 
-	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2);
+	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2).replace(/\./g, ',');;
 	calcularTotal();
-}
-
-function borrarDelCarrito(index) {
-	productosCarrito.splice(index, 1);
-	mostrarInfoProducto();
-}
-
-function borrarCarrito() {
-	productosCarrito = [];
-	mostrarInfoProducto();
 }
 
 function mostrarInfoProducto() {
@@ -81,14 +71,14 @@ function mostrarInfoProducto() {
         <h3 class="Cart_Items__subtitle">${producto.currency}$${ producto.unitCost }</h3>
       </div>
       <div class="Cart_Items__counter col-6 offset-md-1 col-md-4 offset-lg-0 col-lg-2 ">
-        <div class="Cart_Items__btnCount" onclick="countUp(${i})">+</div>
-        <div class="Cart_Items__count" data-unit-cost="${producto.unitCost}" id="count${i}" onchange="calcularSubtotal(${i})">${ producto.count }</div>
-        <div class="Cart_Items__btnCount" onclick="countDown(${i})">-</div>
+        <div class="Cart_Items__btnCount" onclick="incrementarCantidad(${i})">+</div>
+        <div class="Cart_Items__count" data-unit-cost="${producto.unitCost}" id="count${i}" onchange="calcularSubtotal(${i})">${producto.count}</div>
+        <div class="Cart_Items__btnCount" onclick="decrementarCantidad(${i})">-</div>
       </div>
       <div class="Cart_Items__prices col-6 col-md-3 col-lg-3 text-right">
         <div class="Cart_Items__amount row justify-content-end mr-1">
           ${producto.currency}$
-          <div data-index="${i}" class="subtotal" id="subtotal${i}">${(producto.unitCost * producto.count).toFixed(2)}</div>
+          <div class="subtotal" id="subtotal${i}">${(producto.unitCost * producto.count).toFixed(2)}</div>
         </div>
         <u onclick="borrarDelCarrito(${i})" class="Cart_Items__remove">Borrar</u>
       </div>
@@ -104,24 +94,29 @@ function mostrarInfoProducto() {
 	calcularTotal();
 }
 
+function borrarDelCarrito(index) {
+	productosCarrito.splice(index, 1);
+	mostrarInfoProducto();
+}
+
+function borrarCarrito() {
+	productosCarrito = [];
+	mostrarInfoProducto();
+}
+
 document.addEventListener('DOMContentLoaded', function (e) {
 	getJSONData(CART_INFO_URL_DESAFIANTE).then(function (resultObj) {
 		if (resultObj.status === 'ok') {
 			productosCarrito = resultObj.data.articles;
-			console.log(productosCarrito);
 			mostrarInfoProducto();
 		}
 	});
 
-	document.getElementById('toggleUSD').addEventListener('click', () => {
-    toggleChange = (currency === 'UYU');
-		currency = 'USD';
-		toggleCurrency(currency);
-	});
-
-	document.getElementById('toggleUYU').addEventListener('click', () => {
-    toggleChange = (currency === 'USD');
-		currency = 'UYU';
-		toggleCurrency(currency);
-	});
+  /**RADIO DE CURRENCY */
+	for(radio of document.getElementsByClassName('radio_currency')){
+    radio.addEventListener('click', function(e){
+      currency = e.target.dataset.value;
+      toggleCurrency();
+    })
+  };
 });
