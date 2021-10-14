@@ -42,6 +42,7 @@ function calcularSubtotal(i) {
 	calcularTotal();
 }
 
+
 function mostrarInfoProducto() {
   if(!productosCarrito.length) return carritoVacio();
   
