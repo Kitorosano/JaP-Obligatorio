@@ -42,6 +42,19 @@ function calcularSubtotal(i) {
 	calcularTotal();
 }
 
+/**A LO QUE MI CANTIDAD NO ES UN INPUT, HE DE NECESITAR FUNCIONES PARA INCREMENTAR O DECREMENATAR LA CANTIDAD */
+function incrementarCantidad(i) {
+	let cantidad = parseFloat(document.getElementById(`count${i}`).innerText);
+	document.getElementById(`count${i}`).innerText = cantidad + 1;
+	calcularSubtotal(i);
+}
+function decrementarCantidad(i) {
+	let cantidad = parseFloat(document.getElementById(`count${i}`).innerText);
+	if (cantidad > 1)
+		document.getElementById(`count${i}`).innerText = cantidad - 1;
+	calcularSubtotal(i);
+}
+/** */
 
 function mostrarInfoProducto() {
   if(!productosCarrito.length) return carritoVacio();

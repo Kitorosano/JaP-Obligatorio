@@ -44,87 +44,89 @@
 
 	<body>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"></nav>
-		<main class="container p-5">
-			<div class="contenedor-carrito">
-				<div class="Cart-Container" id="contenedor-carrito">
-					<div class="Cart-Header">
-						<h3 class="Cart-Header__Heading">Carrito de compras</h3>
-						<h5 class="Cart-Header__Action" onclick="borrarCarrito()">
-							Borrar todo
-						</h5>
-					</div>
-          <div class="row">
-            <hr class="mt-0 col-12 col-sm-7 col-md-5 col-lg-3" style="box-shadow: 0px 1px 1px 0px rgba(0, 0, 0);">
-            <div class="col"></div>
-            <div class="col"></div>
+		<main class="bg-light">
+      <div class="container p-5">
+        <div class="contenedor-carrito">
+          <div class="Cart-Container" id="contenedor-carrito">
+            <div class="Cart-Header">
+              <h3 class="Cart-Header__Heading">Carrito de compras</h3>
+              <h5 class="Cart-Header__Action" onclick="borrarCarrito()">
+                Borrar todo
+              </h5>
+            </div>
+            <div class="row">
+              <hr class="mt-0 col-12 col-sm-7 col-md-5 col-lg-3" style="box-shadow: 0px 1px 1px 0px rgba(0, 0, 0);">
+              <div class="col"></div>
+              <div class="col"></div>
+            </div>
+            <div id="listaCarrito" class="container  bg-white">
+              <!-- PRODUCTOS DEL CARRITO -->
+            </div>
+            <!-- TIPO DE ENVIO -->
+            <br />
+            <hr>
+            <h3 class="Cart-Header__Heading" style="font-size: 20px;">Tipo de Envio</h3>
+            <section id="tipoEnvio">
+              <div>
+                <input class="tipoEnvio__input" type="radio" id="control_01" name="select_tipoEnvio" value=".15" checked />
+                <label for="control_01">
+                  <h4>Premium</h4>
+                  <p class="tipoEnvio__p">(2-5 días) - Costo del 15% sobre el subtotal..</p>
+                </label>
+              </div>
+              <div>
+                <input class="tipoEnvio__input" type="radio" id="control_02" name="select_tipoEnvio" value=".07" />
+                <label for="control_02">
+                  <h4>Express</h4>
+                  <p class="tipoEnvio__p">(5-8 días) - Costo del 7% sobre el subtotal.</p>
+                </label>
+              </div>
+              <div>
+                <input class="tipoEnvio__input" type="radio" id="control_03" name="select_tipoEnvio" value=".05" />
+                <label for="control_03">
+                  <h4>Standard</h4>
+                  <p class="tipoEnvio__p">(12 a 15 días) - Costo del 5% sobre el subtotal.</p>
+                </label>
+              </div>
+            </section>
+            <!-- CHECKOUT -->
+            <div class="container">
+              <div class="row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col-12 col-md-9 col-lg-6 align-self-end text-right">
+                  <hr />
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <div class="text-center text-md-left">
+                        <div class="checkout__Subtotal">Total</div>
+                        <div class="checkout__items" id="cantidadTotal"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div
+                        class="text-center text-md-right checkout__total-amount"
+                        id="precioTotal"
+                      ></div>
+
+                      <div class=" m-auto checkout__currency btn-group btn-group-toggle w-100 " id="currencyToggle" data-toggle="buttons" >
+                        <label class="btn btn-outline-dark radio_currency" data-value="USD">
+                          <input type="radio" name="currency" autocomplete="off" />USD
+                        </label>
+                        <label class="btn btn-outline-dark radio_currency active" data-value="UYU">
+                          <input 	type="radio" name="currency" 	autocomplete="off" checked />UYU
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-danger btn-block mt-2">Comprar</button>
+                </div>
+              </div>
+            </div>
           </div>
-					<div id="listaCarrito" class="container">
-						<!-- PRODUCTOS DEL CARRITO -->
-					</div>
-					<!-- TIPO DE ENVIO -->
-					<br />
-          <hr>
-          <h3 class="Cart-Header__Heading" style="font-size: 20px;">Tipo de Envio</h3>
-					<section id="tipoEnvio">
-						<div>
-							<input class="tipoEnvio__input" type="radio" id="control_01" name="select_tipoEnvio" value=".15" checked />
-							<label for="control_01">
-								<h4>Premium</h4>
-								<p class="tipoEnvio__p">(2-5 días) - Costo del 15% sobre el subtotal..</p>
-							</label>
-						</div>
-						<div>
-							<input class="tipoEnvio__input" type="radio" id="control_02" name="select_tipoEnvio" value=".07" />
-							<label for="control_02">
-								<h4>Express</h4>
-								<p class="tipoEnvio__p">(5-8 días) - Costo del 7% sobre el subtotal.</p>
-							</label>
-						</div>
-						<div>
-							<input class="tipoEnvio__input" type="radio" id="control_03" name="select_tipoEnvio" value=".05" />
-							<label for="control_03">
-								<h4>Standard</h4>
-								<p class="tipoEnvio__p">(12 a 15 días) - Costo del 5% sobre el subtotal.</p>
-							</label>
-						</div>
-					</section>
-					<!-- CHECKOUT -->
-					<div class="container">
-						<div class="row">
-							<div class="col"></div>
-							<div class="col"></div>
-							<div class="col-12 col-md-9 col-lg-6 align-self-end text-right">
-								<hr />
-								<div class="row align-items-center">
-									<div class="col-md-6">
-										<div class="text-center text-md-left">
-											<div class="checkout__Subtotal">Total</div>
-											<div class="checkout__items" id="cantidadTotal"></div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div
-											class="text-center text-md-right checkout__total-amount"
-											id="precioTotal"
-										></div>
-
-										<div class=" m-auto checkout__currency btn-group btn-group-toggle w-100 " id="currencyToggle" data-toggle="buttons" >
-											<label class="btn btn-outline-dark radio_currency" data-value="USD">
-												<input type="radio" name="currency" autocomplete="off" />USD
-											</label>
-											<label class="btn btn-outline-dark radio_currency active" data-value="UYU">
-												<input 	type="radio" name="currency" 	autocomplete="off" checked />UYU
-											</label>
-										</div>
-									</div>
-								</div>
-
-								<button class="btn btn-danger btn-block mt-2">Comprar</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+        </div>
+      </div>
 		</main>
 
 		<footer class="text-muted">

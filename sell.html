@@ -31,11 +31,12 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"></nav>
-    <div class="container">
-        <div class="text-center p-4">
-          <h2>Vender</h2>
-          <p class="lead">Ingresa los datos del artículo a vender.</p>
-        </div>
+    <main role="main" class="pb-5 bg-light">
+      <div class="text-center p-4">
+        <h2>Vender</h2>
+        <p class="lead">Ingresa los datos del artículo a vender.</p>
+      </div>
+      <div class="container">
         <div class="row justify-content-md-center">
           <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Información del producto</h4>
@@ -157,6 +158,7 @@
           </div>
         </div>
       </div>
+    </main>
       
     <footer class="text-muted">
       <div class="container">
@@ -168,51 +170,51 @@
       </div>
     </footer>
     
-      <div class="alert fade" role="alert" id="alertResult">
-          <span id="resultSpan"></span>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
+    <div class="alert fade" role="alert" id="alertResult">
+      <span id="resultSpan"></span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
-      <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Condiciones de publicación</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+    <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Condiciones de publicación</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                    <h5 class="text-warning">Gold (13%)</h5>
+                    <p class="muted text-justify">Tu producto se verá de forma promocionada en portada, además de las condiciones de Premium y Estándar.</p>
+                </div>
+                <hr>
+                <div class="row">
+                    <h5 class="text-primary">Stándar (7%)</h5>
+                    <p class="muted text-justify">Se mostrará el producto en los primeros lugares de resultados de búsqueda, así cómo cuando se ingrese a la categoría que pertenezca.</p>
+                </div>
+                <hr>
+                <div class="row">
+                    <h5 class="text-secondary">Estándar (3%)</h5>
+                    <p class="muted text-justify">El producto se listará en la categoría correspondiente, así como en los resultados de búsquedas que coincidan con las palabras claves en el nombre.</p>
+                </div>
             </div>
-            <div class="modal-body">
-              <div class="container">
-                  <div class="row">
-                      <h5 class="text-warning">Gold (13%)</h5>
-                      <p class="muted text-justify">Tu producto se verá de forma promocionada en portada, además de las condiciones de Premium y Estándar.</p>
-                  </div>
-                  <hr>
-                  <div class="row">
-                      <h5 class="text-primary">Stándar (7%)</h5>
-                      <p class="muted text-justify">Se mostrará el producto en los primeros lugares de resultados de búsqueda, así cómo cuando se ingrese a la categoría que pertenezca.</p>
-                  </div>
-                  <hr>
-                  <div class="row">
-                      <h5 class="text-secondary">Estándar (3%)</h5>
-                      <p class="muted text-justify">El producto se listará en la categoría correspondiente, así como en los resultados de búsquedas que coincidan con las palabras claves en el nombre.</p>
-                  </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
           </div>
         </div>
       </div>
-      <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
-      <script src="js/jquery-3.4.1.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/dropzone.js"></script>
-      <script src="js/init.js"></script>
-      <script src="js/sell.js"></script>
-    </body>
+    </div>
+    <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/sell.js"></script>
+  </body>
 </html>

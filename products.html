@@ -15,55 +15,67 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"></nav>
-	<main role="main" class="pb-5">
+	<main role="main" class="pb-5 bg-light">
 		<div class="text-center p-4">
 			<h2>Productos</h2>
 			<p class="lead">Verás aquí todos los productos del sitio.</p>
 		</div>
 		<div class="container">
-			<div class="row">
-				<div class="col text-right">
-          <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
-            <label class="btn btn-light active" id="sortAscPrice" >
-                <input type="radio" name="options" autocomplete="off" checked><i class="fas fa-sort-amount-up-alt mr-1"></i>Precio
+			<div class="row justify-content-between">
+        <div class="col-auto text-left">
+          <div class="btn-group" role="group">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-outline-dark active" id="layoutGrid" >
+                  <input type="radio" name="layout" autocomplete="off" checked><i class="fas fa-border-all mr-1"></i>Grid
+              </label>
+              <label class="btn btn-outline-dark" id="layoutList" >
+                  <input type="radio" name="layout" autocomplete="off"><i class="fas fa-bars mr-1"></i>List
+              </label>
+            </div>
+          </div>
+        </div>
+				<div class="col-auto text-right">
+          <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+            <label class="btn btn-outline-dark active" id="sortAscPrice" >
+                <input type="radio" name="sort" autocomplete="off" checked><i class="fas fa-sort-amount-up-alt mr-1"></i>Precio
             </label>
-            <label class="btn btn-light" id="sortDescPrice" >
-                <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Precio
+            <label class="btn btn-outline-dark" id="sortDescPrice" >
+                <input type="radio" name="sort" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Precio
             </label>
-            <label class="btn btn-light" id="sortBySoldCount" >
-                <input type="radio" name="options" autocomplete="off">Más vendidos
+            <label class="btn btn-outline-dark" id="sortBySoldCount" >
+                <input type="radio" name="sort" autocomplete="off">Más vendidos
             </label>
           </div>
 				</div>
 			</div>
-			<div class="row justify-content-end">
-				<div class="col-md-6 col-sm-12 mb-1 container">
-          <input id="txtBuscar" type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" style="border: none; outline: none; border-bottom: 2px solid whitesmoke;">
+			<div class="row">
+				<div class="col-lg-6 col-sm-12 mb-3 container">
+          <div class="row container p-0 m-0">
+            <input id="txtBuscar" type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
+          </div>
         </div>
-					<div class="col-md-6 col-sm-12 mb-1 container">
+					<div class="col-lg-6 col-sm-12 mb-1 container">
 						<div class="row container p-0 m-0">
-							<div class="col">
-								<p class="font-weight-normal text-right my-2">Precio</p>
+							<div class="col-2">
+								<p class="font-weight-normal text-lg-right text-center my-2">Precio</p>
 							</div>
-							<div class="col">
+							<div class="col-lg-3 col-md-2 col-3">
 								<input class="form-control" type="number" placeholder="min." id="rangeFilterPriceMin">
 							</div>
-							<div class="col">
+							<div class="col-lg-3 col-md-2 col-3">
 								<input class="form-control" type="number" placeholder="máx." id="rangeFilterPriceMax">
 							</div>
-							<div class="col-3 p-0">
+							<div class="text-right col-lg-4 offset-lg-0  col-md-3 offset-md-3 col-4 p-0">
 								<div class="btn-group" role="group">
-									<button class="btn btn-light btn-block" id="rangeFilterPrice">Filtrar</button>
-									<button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+									<button class="btn btn-outline-dark btn-block" id="rangeFilterPrice">Filtrar</button>
+									<button class="btn btn-outline-dark btn-sm" id="clearRangeFilter">Limpiar</button>
 								</div>
 							</div>
 						</div>
 					</div>
 			</div>
-			<div class="row">
-				<div class="list-group" id="prod-list-container">
-			</div>
-		</div>
+			<div class="row mt-2" id="prod-list-container"></div>
+    </div>
 	</main>
 	<footer class="text-muted bg-light">
 		<div class="container">
