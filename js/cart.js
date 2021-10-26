@@ -1,5 +1,7 @@
+// let COTIZACION DOLAR = 'https://cotizaciones-brou.herokuapp.com/api/currency/latest';
 let productosCarrito;
 let currency = 'UYU';
+let tipoEnvio = .15;
 let totalCarrito = 0;
 
 /**TODO
@@ -17,8 +19,8 @@ function toggleCurrency() {
 }
 
 function calcularTotal() {
-	// CALCULAR EL TOTAL EN BASE A LOS SUBTOTALES DE LOS PRODUCTOS
-	totalCarrito = 0;
+	// CALCULAR Y MOSTRAR EL TOTAL
+  totalCarrito = 0;
   let subtotalesCarrito = document.getElementsByClassName('subtotal');
 	for (let i = 0; i < subtotalesCarrito.length; i++) {
     let index = subtotalesCarrito[i].id.replace('subtotal','');
@@ -26,20 +28,9 @@ function calcularTotal() {
 		if (productosCarrito[index].currency == 'USD') subtotalProducto *= 40;
 		totalCarrito += subtotalProducto;
 	}
-  // MOSTRAR EL TOTAL DEPENDIENDO DE LA CURRENCY ELEGIDA
-  toggleCurrency();
-}
 
-function calcularSubtotal(i) {
-	elt = document.getElementById(`count${i}`);
-	let precio = parseFloat(elt.dataset.unitCost);
-	let cantidad = parseFloat(elt.innerHTML);
-
-	let total = precio * cantidad;
-
-	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2).replace(/\./g, ',');
-  productosCarrito[i].count = cantidad; //GUARDO LA CANTIDAD EN MI ARRAY DE CARRITO, PARA QUE CUANDO BORRE UN ELEMENTO Y VUELVA A MOSTRAR, CONSERVE LA CANTIDAD
-	calcularTotal();
+  totalCarrito *= tipoEnvio +1
+  toggleCurrency(currency);
 }
 
 /**A LO QUE MI CANTIDAD NO ES UN INPUT, HE DE NECESITAR FUNCIONES PARA INCREMENTAR O DECREMENATAR LA CANTIDAD */
@@ -56,9 +47,21 @@ function decrementarCantidad(i) {
 }
 /** */
 
+function calcularSubtotal(i) {
+	elt = document.getElementById(`count${i}`);
+	let precio = parseFloat(elt.dataset.unitCost);
+	let cantidad = parseFloat(elt.innerHTML);
+
+	let total = precio * cantidad;
+
+	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2).replace(/\./g, ',');
+  productosCarrito[i].count = cantidad; //GUARDO LA CANTIDAD EN MI ARRAY DE CARRITO, PARA QUE CUANDO BORRE UN ELEMENTO Y VUELVA A MOSTRAR, CONSEVE LA CANTIDAD
+	calcularTotal();
+}
+
 function mostrarInfoProducto() {
   if(!productosCarrito.length) return carritoVacio();
-  
+
 	htmlTexto = '';
 	for (let i = 0; i < productosCarrito.length; i++) {
 		const producto = productosCarrito[i];
@@ -106,16 +109,14 @@ function borrarCarrito() {
 	mostrarInfoProducto();
 }
 
-
 function carritoVacio(){
-	document.getElementById('contenedor-carrito').innerHTML = `
+  document.getElementById('contenedor-carrito').innerHTML = `
     <div class="container">
       <h1>Carrito Vacio</h1>
-      <button class="btn btn-secondary mt-2" onclick="location.href='./products.html'">Volver a productos</button>
-    </div> 
+      <button class="btn btn-secondary mt-2" onclick="location.href='./products.html'">Volver a productos</button> 
+    </div>
   `;
 }
-
 
 document.addEventListener('DOMContentLoaded', function (e) {
 	getJSONData(CART_INFO_URL_DESAFIANTE).then(function (resultObj) {
@@ -124,14 +125,19 @@ document.addEventListener('DOMContentLoaded', function (e) {
 			mostrarInfoProducto();
 		}
 	});
+  
+  /**RADIO DE TIPO DE ENVIO */
+  document.getElementById('tipoEnvio').addEventListener('change', (e) =>{
+    tipoEnvio = parseFloat(e.target.value);
+    calcularTotal();
+  })
 
   /**RADIO DE CURRENCY */
-	for(radio of document.getElementsByClassName('radio_currency')){
+  for(radio of document.getElementsByClassName('radio_currency')){
     radio.addEventListener('click', function(e){
       currency = e.target.dataset.value;
       toggleCurrency();
     })
-  };
+  }
+
 });
-
-
