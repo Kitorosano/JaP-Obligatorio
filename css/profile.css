@@ -2,14 +2,32 @@
   width: 200px;
   height: 200px;
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%,-50%);
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid grey;
-  box-shadow: 0px 7px 7px 3px #ccc;;
+  /* border: 1px solid grey; */
+  /* box-shadow: 0px 7px 7px 3px #ccc; */
 }
+
+.account-settings .user-avatars {
+  width: 250px;
+  height: 100px;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin: auto;
+  text-align: center;
+}
+.account-settings .user-avatars img {
+  cursor: pointer;
+}
+.account-settings .user-avatars img:hover {
+  box-shadow: 0px 7px 7px 3px #ccc;
+}
+
 #photo {
   height: 100%;
   width: 100%;
