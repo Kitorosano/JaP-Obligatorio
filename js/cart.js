@@ -18,6 +18,10 @@ function toggleCurrency() {
 	}
 }
 
+function calcularEnvio(){
+  totalCarrito *= 1 + tipoEnvio;
+}
+
 function calcularTotal() {
 	// CALCULAR Y MOSTRAR EL TOTAL
   totalCarrito = 0;
@@ -28,8 +32,7 @@ function calcularTotal() {
 		if (productosCarrito[index].currency == 'USD') subtotalProducto *= 40;
 		totalCarrito += subtotalProducto;
 	}
-
-  totalCarrito *= tipoEnvio +1
+  calcularEnvio()
   toggleCurrency(currency);
 }
 
@@ -55,7 +58,7 @@ function calcularSubtotal(i) {
 	let total = precio * cantidad;
 
 	document.getElementById(`subtotal${i}`).innerHTML = total.toFixed(2).replace(/\./g, ',');
-  productosCarrito[i].count = cantidad; //GUARDO LA CANTIDAD EN MI ARRAY DE CARRITO, PARA QUE CUANDO BORRE UN ELEMENTO Y VUELVA A MOSTRAR, CONSEVE LA CANTIDAD
+  productosCarrito[i].count = cantidad; //GUARDO LA CANTIDAD EN MI ARR  AY DE CARRITO, PARA QUE CUANDO BORRE UN ELEMENTO Y VUELVA A MOSTRAR, CONSEVE LA CANTIDAD
 	calcularTotal();
 }
 

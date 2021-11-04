@@ -104,16 +104,44 @@
 								<div class="row align-items-center">
 									<div class="col-md-6">
 										<div class="text-center text-md-left">
-											<div class="checkout__Subtotal">Total</div>
-											<div class="checkout__items" id="cantidadTotal"></div>
+											<div class="checkout__Subtotal">Subtotal</div>
+											<div class="checkout__items" id="cantidadSubtotal"></div>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div
 											class="text-center text-md-right checkout__total-amount"
+											id="precioSubtotal"
+										>-</div>
+									</div>
+								</div>
+								<div class="row align-items-center">
+									<div class="col-md-6">
+										<div class="text-center text-md-left">
+											<div class="checkout__Subtotal">Costo de Envío</div>
+											<div class="checkout__items" id="cantidadEnvio"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div
+											class="text-center text-md-right checkout__total-amount"
+											id="precioSubtotal"
+										>-</div>
+									</div>
+								</div>
+								<div class="row align-items-center">
+									<div class="col-md-6">
+										<div class="text-center text-md-left">
+											<div class="checkout__Subtotal bold700">Total</div>
+											<div class="checkout__items" id="cantidadTotal"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div
+											class="text-center text-md-right checkout__total-amount bold700"
 											id="precioTotal"
 										></div>
-
+                    <!-- CURRENCY -->
 										<div class=" m-auto checkout__currency btn-group btn-group-toggle w-100 " data-toggle="buttons" >
 											<label class="btn btn-outline-dark radio_currency" data-value="USD">
 												<input type="radio" name="currency" autocomplete="off" />USD

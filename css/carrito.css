@@ -94,9 +94,11 @@
 	display: flex;
 	justify-content: space-between;
 }
+.bold700 {
+  font-weight: 700;
+}
 .checkout__Subtotal {
 	font-size: 22px;
-	font-weight: 700;
 	color: #202020;
 }
 .checkout__items {
@@ -107,7 +109,6 @@
 }
 .checkout__total-amount {
 	font-size: 36px;
-	font-weight: 700;
 	color: #202020;
 }
 .checkout__button {
