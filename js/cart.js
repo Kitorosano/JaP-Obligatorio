@@ -1,25 +1,25 @@
 // let COTIZACION DOLAR = 'https://cotizaciones-brou.herokuapp.com/api/currency/latest';
 let productosCarrito;
-let currency = 'UYU';
-let tipoEnvio = .15;
+let currentCurrency = 'UYU';
+let tipoEnvio = .05;
 let totalCarrito = 0;
+let currentPayment, datosPayment = {};
 
-/**TODO
- * CAMBIAR EL PASAR INDICES, POR USAR UN DATASET CON EL INDICE
- */
 
-function toggleCurrency() {
-	let divTotal = document.getElementById('precioTotal');
+function mostrarTotales() {
+	let DIV_SUBTOTAL = document.getElementById('precioSubtotal'),
+	    DIV_ENVIO = document.getElementById('precioEnvio'),
+	    DIV_TOTAL = document.getElementById('precioTotal');
   
-  if (currency == 'USD') {
-		divTotal.innerHTML = `$${(totalCarrito / 40).toFixed(2).replace(/\./g, ',')}`;
-	} else if(currency == 'UYU') {
-		divTotal.innerHTML = `$${(totalCarrito).toFixed(2).replace(/\./g, ',')}`;
-	}
+  DIV_SUBTOTAL.innerHTML = `$${(totalCarrito).toFixed(2).replace(/\./g, ',')}`;
+  DIV_ENVIO.innerHTML = `$${(tipoEnvio).toFixed(2).replace(/\./g, ',')}`;
+  DIV_TOTAL.innerHTML = `$${(totalCarrito * (1+tipoEnvio)).toFixed(2).replace(/\./g, ',')}`;
 }
 
-function calcularEnvio(){
-  totalCarrito *= 1 + tipoEnvio;
+function convertToCurrentCurrency(prodSubtotal, prodCurrency){
+  if(currentCurrency == 'USD' && prodCurrency == 'UYU') return prodSubtotal / 40;
+  if(currentCurrency == 'UYU' && prodCurrency == 'USD') return prodSubtotal * 40;
+  return prodSubtotal;
 }
 
 function calcularTotal() {
@@ -27,13 +27,13 @@ function calcularTotal() {
   totalCarrito = 0;
   let subtotalesCarrito = document.getElementsByClassName('subtotal');
 	for (let i = 0; i < subtotalesCarrito.length; i++) {
-    let index = subtotalesCarrito[i].id.replace('subtotal','');
-		let subtotalProducto = parseFloat(document.getElementById(`subtotal${index}`).innerHTML);
-		if (productosCarrito[index].currency == 'USD') subtotalProducto *= 40;
-		totalCarrito += subtotalProducto;
+    let productIndex = subtotalesCarrito[i].id.replace('subtotal','');
+		let productSubtotal = parseFloat(document.getElementById(`subtotal${productIndex}`).innerHTML);
+    
+    totalCarrito += convertToCurrentCurrency(productSubtotal, productosCarrito[productIndex].currency);
 	}
-  calcularEnvio()
-  toggleCurrency(currency);
+
+  mostrarTotales();
 }
 
 /**A LO QUE MI CANTIDAD NO ES UN INPUT, HE DE NECESITAR FUNCIONES PARA INCREMENTAR O DECREMENATAR LA CANTIDAD */
@@ -65,7 +65,8 @@ function calcularSubtotal(i) {
 function mostrarInfoProducto() {
   if(!productosCarrito.length) return carritoVacio();
 
-	htmlTexto = '';
+  let	htmlBorrarTodo = ' <div class="row justify-content-end"><h5 class="Cart-Header__Action " onclick="borrarCarrito()"> Borrar todo </h5></div>',
+      htmlTexto = '';
 	for (let i = 0; i < productosCarrito.length; i++) {
 		const producto = productosCarrito[i];
 
@@ -95,10 +96,8 @@ function mostrarInfoProducto() {
     `;
 	}
 
-	document.getElementById('listaCarrito').innerHTML = htmlTexto;
-	document.getElementById(
-		'cantidadTotal'
-	).innerHTML = `(${productosCarrito.length} elementos)`;
+	document.getElementById('listaCarrito').innerHTML = htmlBorrarTodo + htmlTexto;
+	document.getElementById('cantidadTotal').innerHTML = `(${productosCarrito.length} elementos)`;
 	calcularTotal();
 }
 
@@ -114,11 +113,39 @@ function borrarCarrito() {
 
 function carritoVacio(){
   document.getElementById('contenedor-carrito').innerHTML = `
-    <div class="container">
-      <h1>Carrito Vacio</h1>
+    <div class="container text-center m-auto pb-5">
+      <h4>Tu carrito está vacio...</h4>
       <button class="btn btn-secondary mt-2" onclick="location.href='./products.html'">Volver a productos</button> 
     </div>
   `;
+}
+
+function togglePayment(){
+  const DIV_NRO_TARJETA = document.getElementById('payment__nroTarjeta'),
+        DIV_COD_SEGURIDAD = document.getElementById('payment__codSeguridad'),
+        DIV_VENCIMIENTO = document.getElementById('payment__vencimiento'),
+        DIV_NRO_CUENTA = document.getElementById('payment__nroCuenta');
+
+  switch(currentPayment){
+    case 1:
+      DIV_NRO_TARJETA.toggleAttribute('readonly', false);
+      DIV_COD_SEGURIDAD.toggleAttribute('readonly', false);
+      DIV_VENCIMIENTO.toggleAttribute('readonly', false);
+      DIV_NRO_CUENTA.toggleAttribute('readonly', true);
+      break;
+    case 2:
+      DIV_NRO_TARJETA.toggleAttribute('readonly', true);
+      DIV_COD_SEGURIDAD.toggleAttribute('readonly', true);
+      DIV_VENCIMIENTO.toggleAttribute('readonly', true);
+      DIV_NRO_CUENTA.toggleAttribute('readonly', false);
+      break;
+    default:
+      DIV_NRO_TARJETA.toggleAttribute('readonly', true);
+      DIV_COD_SEGURIDAD.toggleAttribute('readonly', true);
+      DIV_VENCIMIENTO.toggleAttribute('readonly', true);
+      DIV_NRO_CUENTA.toggleAttribute('readonly', true);
+      break;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function (e) {
@@ -138,9 +165,94 @@ document.addEventListener('DOMContentLoaded', function (e) {
   /**RADIO DE CURRENCY */
   for(radio of document.getElementsByClassName('radio_currency')){
     radio.addEventListener('click', function(e){
-      currency = e.target.dataset.value;
-      toggleCurrency();
+      currentCurrency = e.target.dataset.value;
+      calcularTotal();
+    })
+  }
+  
+  /**RADIO DE FORMA DE ENVIO */
+  for(radio of document.getElementsByClassName('radio_payment')){
+    radio.addEventListener('click', function(e){
+      currentPayment = parseInt(e.target.id.slice(-1));
+      togglePayment();
     })
   }
 
+  const FORM_PAYMENT = document.getElementById('paymentForm');
+  // EVENTO CLICK AL BOTON DEL MODAL DE FORMATO DE PAGO 
+  FORM_PAYMENT.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const HTML_NRO_TARJETA = document.getElementById('payment__nroTarjeta').value,
+          HTML_COD_SEGURIDAD = document.getElementById('payment__codSeguridad').value,
+          HTML_VENCIMIENTO = document.getElementById('payment__vencimiento').value,
+          HTML_NRO_CUENTA = document.getElementById('payment__nroCuenta').value,
+          DIV_SELECCION_PAYMENT = document.getElementById('paymentSelection');
+
+    // DEPENDIENDO DEL FORMATO DE PAGO COMPRUEBO CAMPOS QUE NECESITO
+    if(currentPayment == 1){
+      if(HTML_NRO_TARJETA == "" || HTML_COD_SEGURIDAD == "" || HTML_VENCIMIENTO == "") return;
+
+      // CREO EL OBJETO
+      datosPayment.formaDePago = currentPayment;
+      datosPayment.nroTarjeta = HTML_NRO_TARJETA;
+      datosPayment.codSeguridad = HTML_COD_SEGURIDAD;
+      datosPayment.vencimiento = HTML_VENCIMIENTO;
+
+      // INDICAR LA SELECCION FUERA DEL MODAL
+      DIV_SELECCION_PAYMENT.innerHTML = "Tarjeta de credito";
+    } else if(currentPayment == 2){
+      if(HTML_NRO_CUENTA == "") return;
+
+      // CREO EL OBJETO
+      datosPayment.formaDePago = currentPayment;
+      datosPayment.nroCuenta = HTML_NRO_CUENTA
+
+      // INDICAR LA SELECCION FUERA DEL MODAL
+      DIV_SELECCION_PAYMENT.innerHTML = "Transferencia bancaria";
+    } else return;
+    
+    // OCULTAR EL MODAL SI EL PAGO ESTA CORRECTO
+    $('#paymentModal').modal('hide');
+  });
+
+  const FORM_BUY = document.getElementById('buyForm');
+  FORM_BUY.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const VALUE_CALLE = document.getElementById('direccionCalle').value,
+          VALUE_NUMERO = document.getElementById('direccionNro').value,
+          VALUE_ESQUINA = document.getElementById('direccionEsquina').value;
+          
+    if(VALUE_CALLE === '' || VALUE_NUMERO === '' || VALUE_ESQUINA === '') return;
+    if(isNaN(currentPayment) || Object.keys(datosPayment).length === 0 ) return; //SEÑALAR QUE FALTA EL FORMATO DE PAGO 
+    
+
+    // CREAR OBJETO DE COMPRA
+    let datosCompra = {}
+
+    // ENVIAR OBJETO DE COMPRA
+    console.log("compra exitosa", datosCompra)
+
+    // MOSTRAR MENSAJE DE COMPRA EXITOSA
+    showAlert();
+  })
 });
+
+
+function showAlert(){
+  let newAlert = `
+  <div class="alert alert-success fade show" style="z-index: 1" role="alert">
+    <span id="resultSpan">Tu compra se ha realizado con exito!</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  `;
+
+  document.getElementById('alertResult').innerHTML = newAlert;
+
+  setTimeout(() => {
+    $('.alert').alert('close');
+  }, 3000)
+}
