@@ -19,6 +19,7 @@ function mostrarTotales() {
 function convertToCurrentCurrency(prodSubtotal, prodCurrency){
   if(currentCurrency == 'USD' && prodCurrency == 'UYU') return prodSubtotal / 40;
   if(currentCurrency == 'UYU' && prodCurrency == 'USD') return prodSubtotal * 40;
+  if(!(prodSubtotal && prodCurrency)) return 0;
   return prodSubtotal;
 }
 
@@ -30,7 +31,7 @@ function calcularTotal() {
     let productIndex = subtotalesCarrito[i].id.replace('subtotal','');
 		let productSubtotal = parseFloat(document.getElementById(`subtotal${productIndex}`).innerHTML);
     
-    totalCarrito += convertToCurrentCurrency(productSubtotal, productosCarrito[productIndex].currency);
+    totalCarrito += convertToCurrentCurrency(productSubtotal, productosCarrito[productIndex]?.currency);
 	}
 
   mostrarTotales();
@@ -112,6 +113,7 @@ function borrarCarrito() {
 }
 
 function carritoVacio(){
+  calcularTotal();
   document.getElementById('contenedor-carrito').innerHTML = `
     <div class="container text-center m-auto pb-5">
       <h4>Tu carrito está vacio...</h4>
@@ -264,7 +266,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
     showAlert();
   })
 });
-
 
 function showAlert(){
   let newAlert = `
