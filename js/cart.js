@@ -3,7 +3,7 @@ let productosCarrito;
 let currentCurrency = 'UYU';
 let tipoEnvio = .05;
 let totalCarrito = 0;
-let currentPayment, datosPayment = {};
+let currentPayment, datosPayment = {}, modalValidated = false;
 
 
 function mostrarTotales() {
@@ -12,7 +12,7 @@ function mostrarTotales() {
 	    DIV_TOTAL = document.getElementById('precioTotal');
   
   DIV_SUBTOTAL.innerHTML = `$${(totalCarrito).toFixed(2).replace(/\./g, ',')}`;
-  DIV_ENVIO.innerHTML = `$${(tipoEnvio).toFixed(2).replace(/\./g, ',')}`;
+  DIV_ENVIO.innerHTML = `(${tipoEnvio}%)\t $${(totalCarrito * tipoEnvio).toFixed(2).replace(/\./g, ',')}`;
   DIV_TOTAL.innerHTML = `$${(totalCarrito * (1+tipoEnvio)).toFixed(2).replace(/\./g, ',')}`;
 }
 
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 			mostrarInfoProducto();
 		}
 	});
-  
+
   /**RADIO DE TIPO DE ENVIO */
   document.getElementById('tipoEnvio').addEventListener('change', (e) =>{
     tipoEnvio = parseFloat(e.target.value);
@@ -178,8 +178,30 @@ document.addEventListener('DOMContentLoaded', function (e) {
     })
   }
 
-  const FORM_PAYMENT = document.getElementById('paymentForm');
+  /** FORMS VALIDATIONS */
+  let forms = document.getElementsByClassName('needs-validation');
+  Array.prototype.filter.call(forms, function(form) {
+    form.addEventListener('submit', function(event) {
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      form.classList.add('was-validated');
+
+      if(!modalValidated){
+        $('#paymentSelection').toggleClass('validateSpan-invalid', true);
+        $('#paymentSelection').toggleClass('validateSpan-valid', false);
+      } else {
+        $('#paymentSelection').toggleClass('validateSpan-invalid', false);
+        $('#paymentSelection').toggleClass('validateSpan-valid', true);
+      }
+
+    }, false);
+  });
+
   // EVENTO CLICK AL BOTON DEL MODAL DE FORMATO DE PAGO 
+  const FORM_PAYMENT = document.getElementById('paymentForm');
   FORM_PAYMENT.addEventListener('submit', event => {
     event.preventDefault();
 
@@ -213,9 +235,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
     } else return;
     
     // OCULTAR EL MODAL SI EL PAGO ESTA CORRECTO
+    modalValidated = true;
+    $('#paymentSelection').toggleClass('validateSpan-invalid', false);
+    $('#paymentSelection').toggleClass('validateSpan-valid', true);
     $('#paymentModal').modal('hide');
   });
 
+  // EVENTO CLICK AL BOTON DE COMPRAR 
   const FORM_BUY = document.getElementById('buyForm');
   FORM_BUY.addEventListener('submit', event => {
     event.preventDefault();
@@ -225,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
           VALUE_ESQUINA = document.getElementById('direccionEsquina').value;
           
     if(VALUE_CALLE === '' || VALUE_NUMERO === '' || VALUE_ESQUINA === '') return;
-    if(isNaN(currentPayment) || Object.keys(datosPayment).length === 0 ) return; //SEÑALAR QUE FALTA EL FORMATO DE PAGO 
+    if(!modalValidated) return;
     
 
     // CREAR OBJETO DE COMPRA

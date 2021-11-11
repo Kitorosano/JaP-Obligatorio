@@ -58,7 +58,7 @@
         <div class="w-75 m-auto">
           <hr>
           <!-- DATOS ADICIONALES -->
-          <form id="buyForm">
+          <form id="buyForm" class="needs-validation" novalidate>
             <div class="row mt-3">
               <!-- DIRECCION DE ENVIO -->
               <div class="col-md-7">
@@ -68,10 +68,16 @@
                     <div class="col-8">
                       <label for="calle">Calle:</label>
                       <input class="form-control" type="text" name="calle" id="direccionCalle" required>
+                      <div class="invalid-feedback">
+                        Por favor, agrega una dirección válida.
+                      </div>
                     </div>
                     <div class="col-4">
                       <label for="nro">Número:</label>
                       <input class="form-control" type="text" name="nro" id="direccionNro" required>
+                      <div class="invalid-feedback">
+                        Por favor, agrega un numero de casa válido.
+                      </div>
                     </div>
                   </div>
                   <br>
@@ -79,6 +85,9 @@
                     <div class="col-8">
                       <label for="esquina">Esquina:</label>
                       <input class="form-control" type="text" name="esquina" id="direccionEsquina" required>
+                      <div class="invalid-feedback">
+                        Por favor, agrega una esquina válida.
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -113,7 +122,8 @@
               <div class="col-12">
                 <h3 class="Cart-Header__Heading" style="font-size: 20px;">Forma de pago</h3>
                 <div class="row align-items-center px-5">
-                  <span id="paymentSelection">No se ha concretado</span>
+                  <span id="paymentSelection" class="validateSpan">No se ha concretado</span>
+
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-link" data-toggle="modal" data-target="#paymentModal">
                     Seleccionar
@@ -134,7 +144,7 @@
                     </div>
                     <div class="col-md-6">
                       <div
-                        class="text-center text-md-right checkout__subtitulo"
+                        class="text-center text-md-right checkout__subtitulo2"
                         id="precioSubtotal"
                       >-</div>
                     </div>
@@ -147,7 +157,7 @@
                     </div>
                     <div class="col-md-6">
                       <div
-                        class="text-center text-md-right checkout__subtitulo"
+                        class="text-center text-md-right checkout__subtitulo2"
                         id="precioEnvio"
                       >-</div>
                     </div>
@@ -156,7 +166,7 @@
                   <div class="row align-items-center">
                     <div class="col-md-6">
                       <div class="text-center text-md-left">
-                        <div class="checkout__subtitulo bold700">Total</div>
+                        <div class="checkout__subtitulo2 bold700" >Total</div>
                         <div class="checkout__items" id="cantidadTotal"></div>
                       </div>
                     </div>
@@ -221,7 +231,7 @@
     <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalTitle" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <form id="paymentForm">
+          <form id="paymentForm" class="needs-validation" novalidate>
             <div class="modal-header">
               <h5 class="modal-title" id="paymentModalTitle">Forma de pago</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
