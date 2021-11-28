@@ -136,9 +136,6 @@ a.custom-card:hover {
   text-decoration: inherit;
 }
 
-.checked {
-  color: orange;
-}
 
 @media (min-width: 768px) { /*MEDIA QUERY PARA EL BOTON DE USUARIO  */
   #btnUsuario {
@@ -214,6 +211,10 @@ a.custom-card:hover {
   cursor: pointer;
 }
 .rating-item.active {
+  color: orange;
+}
+
+.checked {
   color: orange;
 }
 

@@ -1,12 +1,12 @@
-const CATEGORIES_URL = "https://japdevdep.github.io/ecommerce-api/category/all.json";
-const PUBLISH_PRODUCT_URL = "https://japdevdep.github.io/ecommerce-api/product/publish.json";
-const CATEGORY_INFO_URL = "https://japdevdep.github.io/ecommerce-api/category/1234.json";
-const PRODUCTS_URL = "https://japdevdep.github.io/ecommerce-api/product/all.json";
-const PRODUCT_INFO_URL = "https://japdevdep.github.io/ecommerce-api/product/5678.json";
-const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
-const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
-const CART_INFO_URL_DESAFIANTE = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
-const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
+// const PUBLISH_PRODUCT_URL = "https://japdevdep.github.io/ecommerce-api/product/publish.json";
+const CATEGORIES_URL = "http://localhost:4000/api/category";
+const CATEGORY_INFO_URL = "http://localhost:4000/api/category/1234";
+const PRODUCTS_URL = "http://localhost:4000/api/product";
+const PRODUCT_INFO_URL = "http://localhost:4000/api/product/5678";
+const PRODUCT_INFO_COMMENTS_URL = "http://localhost:4000/api/product/5678/comments";
+const CART_URL = "http://localhost:4000/api/user/cart";
+const CART_URL_DESAFIANTE = "http://localhost:4000/api/user/cart/d";
+const BUY_ORDER_URL = "http://localhost:4000/api/user/order";
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -52,14 +52,9 @@ function init() {
   });
 }
 
-function signOut() {
-  if(auth2){
-    auth2.signOut().then(function () {
-      localStorage.removeItem('username');
-    });
-  } else 
-    localStorage.removeItem('username');
-
+async function logOut() {
+  localStorage.removeItem('username');
+  if(auth2) auth2.signOut().catch(err => console.log(err));
   location.replace('./index.html'); //Redireccione al home.html
 }
 
@@ -71,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function(e){
   
   let usuario = localStorage.getItem('username');
 
-  if(!usuario) return signOut();
+  if(!usuario) return logOut();
 
   document.getElementsByTagName('nav')[0]
   .innerHTML = `
@@ -87,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
         <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" onclick="signOut()">Cerrar Sesion</a>
+        <a class="dropdown-item" href="#" onclick="logOut()">Cerrar Sesion</a>
       </div>
     </div>
     <div class="collapse navbar-collapse" id="navbarToggler"> 

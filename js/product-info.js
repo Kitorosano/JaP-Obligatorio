@@ -12,7 +12,7 @@ function showProductImages(array) {
 
 
     appendProductImage += `
-      <div class="carousel-item ${i == 0 ? 'active' : ''}" class="d-block w-100">
+      <div class="carousel-item ${i == 0 ? 'active' : ''}">
         <img class="img-thumbnail" src="${imageSrc}" alt="Slide ${i}">
       </div>`
     

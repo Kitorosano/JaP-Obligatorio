@@ -14,7 +14,7 @@ function onSignIn(googleUser) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
   let yaIngresado = localStorage.getItem('username');
-  if(yaIngresado) redirect(yaIngresado);
+  if(yaIngresado) return redirect(yaIngresado);
 
   let form = document.getElementById('myForm');
 

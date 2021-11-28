@@ -52,7 +52,7 @@ function enviarComentario(){
   const user = localStorage.getItem('username')
   const description = document.getElementById('message').value;
   const score = currentScore;
-  if(!user || description == '' || !score) return; //Si alguno de los datos no esta o es null Cancelar en envio
+  if(!user || description == '' || !score) return alert('Completa los campos!'); //Si alguno de los datos no esta o es null Cancelar en envio
 
   // Reset Formulario y estrellas
   document.getElementById('input-comment').reset();

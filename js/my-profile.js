@@ -26,8 +26,9 @@ FORM.addEventListener('submit', event => {
     "imagen": IMG_FOTO.src
   }
 
-  //GUARDO EN EL LOCAL STORAGE
-  localStorage.setItem('datosPerfil', JSON.stringify(datosPerfil)); 
+  //GUARDO EN EL SERVIDOR
+  localStorage.setItem('datosPerfil', JSON.stringify(datosPerfil));
+
   showAlert(); // ALERTA 'CAMBIOS GUARDADOS'
   showUnsavedChanges(true); //OCULTO EL 'CAMBIOS SIN GUARDAR'
 })
@@ -48,7 +49,7 @@ function obtenerDatosPerfil(){
 
 function showAlert(){
   let newAlert = `
-  <div class="alert alert-success fade show position-relative mb-0" style="top: 0%" role="alert">
+  <div class="alert alert-success fade show mb-1" style="z-index: 100" role="alert">
     <span id="resultSpan">La informacion se ha guardado exitosamente!</span>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
